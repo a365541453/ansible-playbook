@@ -1,0 +1,7 @@
+---
+- name: change root password
+  shell: echo P@ssw0rd123 | passwd root --stdin
+
+
+
+

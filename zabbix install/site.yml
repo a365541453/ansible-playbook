@@ -1,0 +1,9 @@
+---
+- host:all
+  role:
+    - 1_base
+    - 2_public_key
+    - 3_firewall
+    - 4_install
+
+    
