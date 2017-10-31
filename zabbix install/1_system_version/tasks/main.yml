@@ -1,21 +1,22 @@
 ---
+
 - name: backup yum.repo die
   shell: mv /etc/yum.repos.d  /etc/yum.repos.d.bak
 
 - name: makefile dir
-  shell: makeir /etc/yum.repos.d
+  shell: mkdir /etc/yum.repos.d
 
 - name: copy mirror files for Centos6
-  when: 
-    - ansible_distribution == 'Centos'
-    - ansible_distribution_major_version|int == 6
   copy: src=Centos-6.repo dest=/etc/yum.repos.d/Centos-6.repo
+  when: 
+    ansible_distribution_major_version == '6'
+  
 
 - name: copy mirror files for Centos7
-  when: 
-    - ansible_distribution == 'Centos'
-    - ansible_distribution_major_version|int == 7
   copy: src=Centos-7.repo dest=/etc/yum.repos.d/Centos-7.repo
+  when: 
+    ansible_distribution_major_version == '7'
+  
 
 - name: clean all
   shell: yum clean all

@@ -1,4 +1,9 @@
 ---
+- name: install firewalld
+  yum: 
+    name: firewalld
+    state: present
+
 - name: disable firewall
   service: 
     name: firewalld
@@ -6,12 +11,3 @@
 
 - name:  remove firewall init
   shell: systemctl disable firewalld
-
-- name: close selinux
-  shell: setenforce 0
-
-- name: disable selinux
-  lineinfile:
-    path: /etc/selinux/config
-    regexp: '^SELINUX='
-    line: 'SELINUX=enforcing'

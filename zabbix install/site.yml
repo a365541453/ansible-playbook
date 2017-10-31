@@ -1,9 +1,11 @@
 ---
-- host:all
-  role:
-    - 1_base
-    - 2_public_key
+- hosts: all
+  roles:  
+    - 1_system_version
+    - 2_base
     - 3_firewall
-    - 4_install
+    - 4_pubilc_key
+    - 5_zabbix-server
+    - 6_zabbix-agent
 
     

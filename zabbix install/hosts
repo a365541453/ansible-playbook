@@ -1,0 +1,11 @@
+[zabbix-server]
+192.168.147.192	ansible_ssh_user='root'	ansible_ssh_pass='P@ssw0rd'
+
+[zabbix-agent]
+192.168.147.193	ansible_ssh_user='root'	ansible_ssh_pass='P@ssw0rd'
+192.168.147.194	ansible_ssh_user='root'	ansible_ssh_pass='P@ssw0rd'
+192.168.147.195	ansible_ssh_user='root'	ansible_ssh_pass='P@ssw0rd'
+192.168.147.196	ansible_ssh_user='root'	ansible_ssh_pass='P@ssw0rd'
+
+
+
