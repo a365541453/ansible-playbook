@@ -1,0 +1,12 @@
+- name: copy rpm
+  copy: src={{ item }} dest=/tmp/
+  with_items: 
+    - "{{ logrotate }}"
+    - "{{ zabbix-agent }}"
+- name: install rpm
+  shell: rpm -ivh {{ item }}
+  with_items:
+    - "{{ logrotate }}"
+    - "{{ zabbix-agent }}"
+- name: copy zabbix config
+  template: src=zabbix_agentd.conf dest=/etc/zabbix/zabbix_agentd.co

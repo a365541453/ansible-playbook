@@ -1,11 +1,5 @@
 ---
-- hosts: all
-  roles:  
-    - 1_system_version
-    - 2_base
-    - 3_firewall
-    - 4_pubilc_key
-    - 5_zabbix-server
+- name: install zabbix-agent
+  hosts: zabbix-agent
+  roles:
     - 6_zabbix-agent
-
-    
