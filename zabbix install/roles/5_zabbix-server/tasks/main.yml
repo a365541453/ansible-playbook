@@ -1,0 +1,26 @@
+---
+- name: mkdir rpm dir
+  shell: mkdir -p /tmp/rpm/
+
+- name: copy all rpm
+  copy: src=rpm.tar dest=/tmp/
+
+- name: unzip rpm.tar
+  shell: tar -xvf /tmp/rpm.tar -C /tmp/rpm
+
+- name: rpm install
+  shell: rpm -ivh /tmp/rpm/*.rpm
+
+- name: zabbix for httpd conf
+  template: src=zabbix.conf dest=/etc/httpd/conf.d/zabbix.conf
+  notify: 
+    -restart httpd
+
+- name: unzip create.sql.gz
+  shell: gzip -d /usr/share/doc/zabbix-server-mysql-3.4.4/create.sql.gz
+
+
+
+
+
+

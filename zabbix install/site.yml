@@ -1,5 +1,20 @@
 ---
-- name: install zabbix-agent
-  hosts: zabbix_agent
+#- name: install zabbix-agent
+#  hosts: zabbix_agent
+#  roles:
+#    - 1_system_version
+#    - 2_base
+#    - 3_firewall
+#    - 4_pubilc_key
+#    - 6_zabbix-agent
+
+- name: install zabbix-server
+  hosts: zabbix_server
   roles:
-    - 6_zabbix-agent
+#    - 1_system_version
+#    - 2_base
+#    - 3_firewall
+#    - 4_pubilc_key
+#    - 7_mysql
+    - 5_zabbix-server
+#    - 6_zabbix-agent
