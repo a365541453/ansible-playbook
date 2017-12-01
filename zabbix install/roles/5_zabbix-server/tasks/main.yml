@@ -14,12 +14,28 @@
 - name: zabbix for httpd conf
   template: src=zabbix.conf dest=/etc/httpd/conf.d/zabbix.conf
   notify: 
-    -restart httpd
+    - restart httpd
+
+- name: copy mariadb rpm tar
+  copy: src=mariadb.tar.gz dest=/tmp/
+
+- name: unzip tar.gz
+  shell: tar -zxvf /tmp/mariadb.tar.gz -C /tmp/mariadb
+
+- name: install mariadb rpm
+  shell: rpm -ivh /tmp/mariadb/*.rpm
+
+- name: startup mariadb
+  
 
 - name: unzip create.sql.gz
   shell: gzip -d /usr/share/doc/zabbix-server-mysql-3.4.4/create.sql.gz
 
+- name: copy script to server
+  copy: src=setup_mysql.sh dest=/tmp/
 
+- name: run shell script
+  shell: bash /tmp/setup_mysql.sh
 
 
 
