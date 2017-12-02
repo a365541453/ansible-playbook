@@ -2,13 +2,13 @@
 - name: mkdir rpm dir
   shell: mkdir -p /tmp/rpm/
 
-- name: copy all rpm
+- name: copy zabbix rpm
   copy: src=rpm.tar dest=/tmp/
 
 - name: unzip rpm.tar
   shell: tar -xvf /tmp/rpm.tar -C /tmp/rpm
 
-- name: rpm install
+- name: install zabbix rpm
   shell: rpm -ivh /tmp/rpm/*.rpm
 
 - name: zabbix for httpd conf
@@ -17,16 +17,19 @@
     - restart httpd
 
 - name: copy mariadb rpm tar
-  copy: src=mariadb.tar.gz dest=/tmp/
+  copy: src=mariadb.tar dest=/tmp/
 
-- name: unzip tar.gz
-  shell: tar -zxvf /tmp/mariadb.tar.gz -C /tmp/mariadb
+- name: mkdir /tmp/mariadb
+  shell: mkdir -p /tmp/mariadb
+
+- name: unzip mariadb tar
+  shell: tar -xvf /tmp/mariadb.tar -C /tmp/mariadb
 
 - name: install mariadb rpm
   shell: rpm -ivh /tmp/mariadb/*.rpm
 
 - name: startup mariadb
-  
+  service: name=mariadb state=restarted
 
 - name: unzip create.sql.gz
   shell: gzip -d /usr/share/doc/zabbix-server-mysql-3.4.4/create.sql.gz
@@ -36,6 +39,15 @@
 
 - name: run shell script
   shell: bash /tmp/setup_mysql.sh
+
+- name: zabbix_server for conf
+  template: src=zabbix_server.conf dest=/etc/zabbix/zabbix_server.conf
+
+- name: start zabbix server and agent
+  service: name={{ item }} state=started
+  with_items:
+    - zabbix-server
+    - zabbix-agent
 
 
 
